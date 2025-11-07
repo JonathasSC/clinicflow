@@ -3,12 +3,12 @@ package com.clinicflow.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data                       
 @Entity
-@Builder              
+@Table(name = "patient")
+@Data                       
 @NoArgsConstructor          
 @AllArgsConstructor          
-@Table(name = "patient")
+@Builder              
 public class Patient {
 
     @Id
