@@ -4,7 +4,7 @@ import com.clinicflow.dto.AddressDTO;
 import com.clinicflow.dto.request.ClinicRequestDTO;
 import com.clinicflow.dto.response.ClinicResponseDTO;
 import com.clinicflow.models.Address;
-import com.clinicflow.models.Clinic;
+import com.clinicflow.models.business.Clinic;
 import com.clinicflow.repositories.ClinicRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
