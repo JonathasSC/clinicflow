@@ -6,6 +6,8 @@ import com.clinicflow.dto.response.ClinicResponseDTO;
 import com.clinicflow.models.Address;
 import com.clinicflow.models.business.Clinic;
 import com.clinicflow.repositories.ClinicRepository;
+import com.clinicflow.services.interfaces.IClinicService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,11 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class ClinicService {
-
+public class ClinicService implements IClinicService {
     private final ClinicRepository clinicRepository;
 
-        public ClinicResponseDTO registerClinic(ClinicRequestDTO dto) {
+    @Override
+    public ClinicResponseDTO create(ClinicRequestDTO dto) {
 
         UUID tenantId = dto.getTenantId();
 
@@ -43,6 +45,7 @@ public class ClinicService {
         return buildClinicResponseDTO(saved);
     }
 
+    @Override
     public List<ClinicResponseDTO> findAll() {
         return clinicRepository.findAll().stream()
                 .map(this::buildClinicResponseDTO)

@@ -3,7 +3,7 @@ package com.clinicflow.controllers;
 import com.clinicflow.dto.request.ClinicRequestDTO;
 import com.clinicflow.dto.response.ClinicResponseDTO;
 import com.clinicflow.dto.response.ClinicResponseListDTO;
-import com.clinicflow.services.ClinicService;
+import com.clinicflow.services.interfaces.IClinicService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clinics")
+@RequestMapping("/clinic")
 @RequiredArgsConstructor
 @Validated
 public class ClinicController {
 
-    private final ClinicService clinicService;
+    private final IClinicService clinicService;
 
     @PostMapping
     public ResponseEntity<ClinicResponseDTO> register(@Valid @RequestBody ClinicRequestDTO clinicDto) {
-        ClinicResponseDTO response = clinicService.registerClinic(clinicDto);
+        ClinicResponseDTO response = clinicService.create(clinicDto);
         return ResponseEntity.ok(response);
     }
 

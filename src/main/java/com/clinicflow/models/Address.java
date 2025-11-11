@@ -1,5 +1,4 @@
 package com.clinicflow.models;
-
 import jakarta.persistence.*;
 import lombok.*;
 
