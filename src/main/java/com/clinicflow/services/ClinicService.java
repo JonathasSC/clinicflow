@@ -6,18 +6,19 @@ import com.clinicflow.dto.response.ClinicResponseDTO;
 import com.clinicflow.models.Address;
 import com.clinicflow.models.business.Clinic;
 import com.clinicflow.repositories.ClinicRepository;
-import com.clinicflow.services.interfaces.IClinicService;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+
 @Service
-@RequiredArgsConstructor
-public class ClinicService implements IClinicService {
-    private final ClinicRepository clinicRepository;
+public class ClinicService extends BaseService<Clinic, UUID, ClinicRequestDTO, ClinicResponseDTO> {
+
+    protected ClinicService(ClinicRepository repository) {
+        super(repository);
+    }
 
     @Override
     public ClinicResponseDTO create(ClinicRequestDTO dto) {
@@ -28,10 +29,9 @@ public class ClinicService implements IClinicService {
             tenantId = UUID.randomUUID();
         }
 
-        if (clinicRepository.existsByTenantId(tenantId)) {
+        if (repository.existsById(tenantId)) {
             throw new RuntimeException("Tenant ID já cadastrado: " + tenantId);
         }
-
 
         Address address = buildAddressFromDTO(dto.getAddress());
 
@@ -41,13 +41,13 @@ public class ClinicService implements IClinicService {
                 .address(address)
                 .build();
 
-        Clinic saved = clinicRepository.save(clinic);
+        Clinic saved = repository.save(clinic);
         return buildClinicResponseDTO(saved);
     }
 
     @Override
     public List<ClinicResponseDTO> findAll() {
-        return clinicRepository.findAll().stream()
+        return repository.findAll().stream()
                 .map(this::buildClinicResponseDTO)
                 .toList();
     }
@@ -77,5 +77,20 @@ public class ClinicService implements IClinicService {
                         .zipCode(address.getZipCode())
                         .build())
                 .build();
+    }
+
+    @Override
+    public ClinicResponseDTO update(UUID id, ClinicRequestDTO request) {
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    @Override
+    protected Clinic toEntity(ClinicRequestDTO request) {
+        throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
+    }
+
+    @Override
+    protected ClinicResponseDTO toResponse(Clinic entity) {
+        throw new UnsupportedOperationException("Unimplemented method 'toResponse'");
     }
 }

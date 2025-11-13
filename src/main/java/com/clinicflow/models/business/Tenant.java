@@ -17,7 +17,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @AllArgsConstructor          
 @Builder  
 public class Tenant {
-
+    @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true)
     private UUID id;

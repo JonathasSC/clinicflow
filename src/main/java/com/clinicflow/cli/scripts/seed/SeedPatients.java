@@ -6,16 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.clinicflow.repositories.ClinicRepository;
 import com.clinicflow.models.business.Clinic;
-import com.clinicflow.cli.scripts.BaseScript;
+import com.clinicflow.cli.scripts.interfaces.ICommandScript;
 import com.clinicflow.models.Address;
 
 @Component
-public class SeedPatients implements BaseScript {
+public class SeedPatients implements ICommandScript {
 
     @Autowired
     private ClinicRepository clinicRepository;
 
-    public void run(){
+    @Override
+    public String getName() {
+        return "patients";
+    }
+
+    public void run(String... args){
         try { 
             System.out.println("🌱 Populando o banco com dados iniciais...");
     

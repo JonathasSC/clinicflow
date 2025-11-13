@@ -9,7 +9,6 @@ import com.clinicflow.models.business.Clinic;
 
 
 @Repository
-public interface ClinicRepository extends JpaRepository<Clinic, Long> {
-    // custom method
+public interface ClinicRepository extends JpaRepository<Clinic, UUID> {
     boolean existsByTenantId(UUID tenantId);
 }

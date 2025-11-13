@@ -4,14 +4,13 @@ import com.clinicflow.dto.request.TenantRequestDTO;
 import com.clinicflow.dto.response.TenantResponseDTO;
 import com.clinicflow.models.business.Tenant;
 import com.clinicflow.repositories.TenantRepository;
-import com.clinicflow.services.interfaces.ITenantService;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+
 @Service
-public class TenantService extends BaseService<Tenant, UUID, TenantRequestDTO, TenantResponseDTO>
-        implements ITenantService {
+public class TenantService extends BaseService<Tenant, UUID, TenantRequestDTO, TenantResponseDTO> {
 
     public TenantService(TenantRepository repository) {
         super(repository);
